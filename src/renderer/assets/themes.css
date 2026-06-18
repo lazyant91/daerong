@@ -1,0 +1,275 @@
+:root {
+  /* Default Theme (Classic Violet) */
+  --bg-gradient: linear-gradient(145deg, #0c0817 0%, #160e2e 50%, #0b0714 100%);
+  --text-primary: #f3f0ff;
+  --text-secondary: #a39eb9;
+  --primary-color: #9d4edd;
+  --primary-glow: rgba(157, 78, 221, 0.4);
+  --primary-hover: #b5179e;
+  --danger-color: #ff4d4f;
+  --danger-hover: #ff7875;
+  --input-bg: rgba(0, 0, 0, 0.45);
+  --input-focus-border: #7209b7;
+  --card-bg: rgba(255, 255, 255, 0.03);
+  --card-border: rgba(255, 255, 255, 0.06);
+}
+
+/* 1. Classic Violet (Default) */
+:root[data-theme="classic-violet"] {
+  --bg-gradient: linear-gradient(145deg, #0c0817 0%, #160e2e 50%, #0b0714 100%);
+  --text-primary: #f3f0ff;
+  --text-secondary: #a39eb9;
+  --primary-color: #9d4edd;
+  --primary-glow: rgba(157, 78, 221, 0.4);
+  --primary-hover: #b5179e;
+  --input-focus-border: #7209b7;
+  --card-bg: rgba(255, 255, 255, 0.03);
+  --card-border: rgba(255, 255, 255, 0.06);
+}
+
+/* 2. Deep Emerald */
+:root[data-theme="deep-emerald"] {
+  --bg-gradient: linear-gradient(145deg, #04140e 0%, #08251b 50%, #030f0a 100%);
+  --text-primary: #e6fcf5;
+  --text-secondary: #96b8ad;
+  --primary-color: #0ca678;
+  --primary-glow: rgba(12, 166, 120, 0.4);
+  --primary-hover: #20c997;
+  --input-focus-border: #099268;
+  --card-bg: rgba(255, 255, 255, 0.02);
+  --card-border: rgba(255, 255, 255, 0.05);
+}
+
+/* 3. Sunset Glow */
+:root[data-theme="sunset-glow"] {
+  --bg-gradient: linear-gradient(145deg, #180905 0%, #2f120a 50%, #130704 100%);
+  --text-primary: #fff4e6;
+  --text-secondary: #d8b4a6;
+  --primary-color: #f76707;
+  --primary-glow: rgba(247, 103, 7, 0.4);
+  --primary-hover: #ff922b;
+  --input-focus-border: #d9480f;
+  --card-bg: rgba(255, 255, 255, 0.03);
+  --card-border: rgba(255, 255, 255, 0.06);
+}
+
+/* 4. Midnight Blue */
+:root[data-theme="midnight-blue"] {
+  --bg-gradient: linear-gradient(145deg, #050a18 0%, #0a152e 50%, #040813 100%);
+  --text-primary: #edf2ff;
+  --text-secondary: #a5b3cd;
+  --primary-color: #3b5bdb;
+  --primary-glow: rgba(59, 91, 219, 0.4);
+  --primary-hover: #4c6ef5;
+  --input-focus-border: #2b4bcb;
+  --card-bg: rgba(255, 255, 255, 0.03);
+  --card-border: rgba(255, 255, 255, 0.06);
+}
+
+/* 5. Cyberpunk Neon */
+:root[data-theme="cyberpunk-neon"] {
+  --bg-gradient: linear-gradient(145deg, #05050e 0%, #0c0b1a 50%, #030308 100%);
+  --text-primary: #ffffff;
+  --text-secondary: #8b8ba8;
+  --primary-color: #ff007f;
+  --primary-glow: rgba(255, 0, 127, 0.5);
+  --primary-hover: #00ffff;
+  --input-focus-border: #00cccc;
+  --card-bg: rgba(255, 0, 127, 0.02);
+  --card-border: rgba(0, 255, 255, 0.1);
+}
+
+/* 6. Rose Quartz */
+:root[data-theme="rose-quartz"] {
+  --bg-gradient: linear-gradient(145deg, #16080b 0%, #290f15 50%, #100608 100%);
+  --text-primary: #fff0f6;
+  --text-secondary: #cfa4b2;
+  --primary-color: #da77f2;
+  --primary-glow: rgba(218, 119, 242, 0.4);
+  --primary-hover: #e599f7;
+  --input-focus-border: #be4bdb;
+  --card-bg: rgba(255, 255, 255, 0.03);
+  --card-border: rgba(255, 255, 255, 0.06);
+}
+
+/* 7. Monochrome Slate */
+:root[data-theme="monochrome-slate"] {
+  --bg-gradient: linear-gradient(145deg, #111216 0%, #1d1f27 50%, #0a0b0d 100%);
+  --text-primary: #f1f3f5;
+  --text-secondary: #909296;
+  --primary-color: #adb5bd;
+  --primary-glow: rgba(173, 181, 189, 0.3);
+  --primary-hover: #dee2e6;
+  --input-focus-border: #868e96;
+  --card-bg: rgba(255, 255, 255, 0.02);
+  --card-border: rgba(255, 255, 255, 0.05);
+}
+
+/* 8. Tokyo Sakura */
+:root[data-theme="tokyo-sakura"] {
+  --bg-gradient: linear-gradient(145deg, #1a0c11 0%, #301620 50%, #13080c 100%);
+  --text-primary: #fff0f6;
+  --text-secondary: #dab3c1;
+  --primary-color: #f783ac;
+  --primary-glow: rgba(247, 131, 172, 0.4);
+  --primary-hover: #faa2c1;
+  --input-focus-border: #e64980;
+  --card-bg: rgba(255, 255, 255, 0.03);
+  --card-border: rgba(255, 255, 255, 0.06);
+}
+
+/* 9. Volcanic Lava */
+:root[data-theme="volcanic-lava"] {
+  --bg-gradient: linear-gradient(145deg, #120303 0%, #250707 50%, #0c0202 100%);
+  --text-primary: #fff5f5;
+  --text-secondary: #cc9999;
+  --primary-color: #fa5252;
+  --primary-glow: rgba(250, 82, 82, 0.4);
+  --primary-hover: #ff8787;
+  --input-focus-border: #e03131;
+  --card-bg: rgba(255, 255, 255, 0.03);
+  --card-border: rgba(255, 255, 255, 0.06);
+}
+
+/* 10. Nordic Frost */
+:root[data-theme="nordic-frost"] {
+  --bg-gradient: linear-gradient(145deg, #050f16 0%, #0b1c29 50%, #030a0f 100%);
+  --text-primary: #f0f8ff;
+  --text-secondary: #92b2ca;
+  --primary-color: #228be6;
+  --primary-glow: rgba(34, 139, 230, 0.4);
+  --primary-hover: #4dabf7;
+  --input-focus-border: #1c7ed6;
+  --card-bg: rgba(255, 255, 255, 0.02);
+  --card-border: rgba(255, 255, 255, 0.05);
+}
+
+/* 11. Golden Amber */
+:root[data-theme="golden-amber"] {
+  --bg-gradient: linear-gradient(145deg, #150f05 0%, #291e0a 50%, #0f0b03 100%);
+  --text-primary: #fff9db;
+  --text-secondary: #d1c1a2;
+  --primary-color: #fab005;
+  --primary-glow: rgba(250, 176, 5, 0.4);
+  --primary-hover: #ffd43b;
+  --input-focus-border: #f59f00;
+  --card-bg: rgba(255, 255, 255, 0.03);
+  --card-border: rgba(255, 255, 255, 0.06);
+}
+
+/* 12. Cyber Green */
+:root[data-theme="cyber-green"] {
+  --bg-gradient: linear-gradient(145deg, #030e06 0%, #071f0d 50%, #020a04 100%);
+  --text-primary: #ebfbee;
+  --text-secondary: #8cb595;
+  --primary-color: #37b24d;
+  --primary-glow: rgba(55, 178, 77, 0.4);
+  --primary-hover: #40c057;
+  --input-focus-border: #2f9e44;
+  --card-bg: rgba(255, 255, 255, 0.02);
+  --card-border: rgba(255, 255, 255, 0.05);
+}
+
+/* 13. Retro Arcade */
+:root[data-theme="retro-arcade"] {
+  --bg-gradient: linear-gradient(145deg, #060b19 0%, #0c1630 50%, #040711 100%);
+  --text-primary: #e8ebf0;
+  --text-secondary: #9fa6b8;
+  --primary-color: #ffcc00;
+  --primary-glow: rgba(255, 204, 0, 0.4);
+  --primary-hover: #ffe066;
+  --input-focus-border: #ffd43b;
+  --card-bg: rgba(255, 255, 255, 0.03);
+  --card-border: rgba(255, 255, 255, 0.06);
+}
+
+/* 14. Deep Berry */
+:root[data-theme="deep-berry"] {
+  --bg-gradient: linear-gradient(145deg, #13040c 0%, #260918 50%, #0d0208 100%);
+  --text-primary: #fff0f6;
+  --text-secondary: #cca3b7;
+  --primary-color: #e64980;
+  --primary-glow: rgba(230, 73, 128, 0.4);
+  --primary-hover: #f783ac;
+  --input-focus-border: #d6336c;
+  --card-bg: rgba(255, 255, 255, 0.03);
+  --card-border: rgba(255, 255, 255, 0.06);
+}
+
+/* 15. Cappuccino */
+:root[data-theme="cappuccino"] {
+  --bg-gradient: linear-gradient(145deg, #140d0a 0%, #261914 50%, #0e0907 100%);
+  --text-primary: #fcf8f2;
+  --text-secondary: #c5b8b0;
+  --primary-color: #b08968;
+  --primary-glow: rgba(176, 137, 104, 0.4);
+  --primary-hover: #ddb892;
+  --input-focus-border: #9c6644;
+  --card-bg: rgba(255, 255, 255, 0.03);
+  --card-border: rgba(255, 255, 255, 0.06);
+}
+
+/* 16. Mystic Lavender */
+:root[data-theme="mystic-lavender"] {
+  --bg-gradient: linear-gradient(145deg, #0f0d1a 0%, #1c1830 50%, #0a0812 100%);
+  --text-primary: #f3f0ff;
+  --text-secondary: #b3aed2;
+  --primary-color: #845ef7;
+  --primary-glow: rgba(132, 94, 247, 0.4);
+  --primary-hover: #9775fa;
+  --input-focus-border: #7048e8;
+  --card-bg: rgba(255, 255, 255, 0.03);
+  --card-border: rgba(255, 255, 255, 0.06);
+}
+
+/* 17. Abyssal Dark */
+:root[data-theme="abyssal-dark"] {
+  --bg-gradient: linear-gradient(145deg, #050505 0%, #0f0f0f 50%, #000000 100%);
+  --text-primary: #e0e0e0;
+  --text-secondary: #757575;
+  --primary-color: #444444;
+  --primary-glow: rgba(255, 255, 255, 0.1);
+  --primary-hover: #666666;
+  --input-focus-border: #555555;
+  --card-bg: rgba(255, 255, 255, 0.01);
+  --card-border: rgba(255, 255, 255, 0.03);
+}
+
+/* 18. Ocean Breeze */
+:root[data-theme="ocean-breeze"] {
+  --bg-gradient: linear-gradient(145deg, #030f14 0%, #061e29 50%, #020a0d 100%);
+  --text-primary: #e3fafc;
+  --text-secondary: #8cb9cc;
+  --primary-color: #15aabf;
+  --primary-glow: rgba(21, 170, 191, 0.4);
+  --primary-hover: #22b8cf;
+  --input-focus-border: #0c8599;
+  --card-bg: rgba(255, 255, 255, 0.02);
+  --card-border: rgba(255, 255, 255, 0.05);
+}
+
+/* 19. Royal Gold */
+:root[data-theme="royal-gold"] {
+  --bg-gradient: linear-gradient(145deg, #050a14 0%, #0a1326 50%, #03060d 100%);
+  --text-primary: #f7f4eb;
+  --text-secondary: #b3a484;
+  --primary-color: #d4af37;
+  --primary-glow: rgba(212, 175, 55, 0.4);
+  --primary-hover: #eccb65;
+  --input-focus-border: #aa8822;
+  --card-bg: rgba(255, 255, 255, 0.03);
+  --card-border: rgba(255, 255, 255, 0.06);
+}
+
+/* 20. Autumn Forest */
+:root[data-theme="autumn-forest"] {
+  --bg-gradient: linear-gradient(145deg, #140b05 0%, #26150a 50%, #0e0803 100%);
+  --text-primary: #fdf5e6;
+  --text-secondary: #cca380;
+  --primary-color: #d9480f;
+  --primary-glow: rgba(217, 72, 15, 0.4);
+  --primary-hover: #f76707;
+  --input-focus-border: #ad370b;
+  --card-bg: rgba(255, 255, 255, 0.03);
+  --card-border: rgba(255, 255, 255, 0.06);
+}

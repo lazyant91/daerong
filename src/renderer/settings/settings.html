@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Daerong 설정</title>
+  <link rel="stylesheet" href="../assets/themes.css">
+  <link rel="stylesheet" href="settings.css">
+</head>
+<body>
+  <div class="settings-container">
+    <header class="header">
+      <div class="title-logo">
+        <img src="../assets/icon.svg" class="logo-img" alt="Daerong Logo">
+        <h1>Daerong</h1>
+      </div>
+      <p class="subtitle">클립보드 이미지 대롱대롱 띄우기</p>
+    </header>
+
+    <main class="settings-main">
+      <!-- Hotkey Config Section -->
+      <section class="config-card">
+        <h2>⌨️ 단축키 설정</h2>
+        <div class="input-group">
+          <label for="hotkey-input">단축키를 입력하려면 아래 필드를 클릭하고 원하는 키 조합을 누르세요.</label>
+          <input type="text" id="hotkey-input" readonly placeholder="키를 입력하세요 (예: Ctrl+Shift+F)" />
+        </div>
+      </section>
+
+      <!-- Options Section -->
+      <section class="config-card">
+        <h2>⚙️ 일반 설정</h2>
+        
+        <div class="switch-row">
+          <div class="switch-info">
+            <span class="switch-label">X 버튼 클릭 시 트레이로 최소화</span>
+            <span class="switch-desc">비활성화 시 창을 닫으면 프로그램이 즉시 종료됩니다.</span>
+          </div>
+          <label class="switch">
+            <input type="checkbox" id="close-to-tray-checkbox">
+            <span class="slider round"></span>
+          </label>
+        </div>
+
+        <div class="switch-row">
+          <div class="switch-info">
+            <span class="switch-label">부팅 시 자동 시작</span>
+            <span class="switch-desc">Windows가 시작할 때 백그라운드에서 자동 실행합니다.</span>
+          </div>
+          <label class="switch">
+            <input type="checkbox" id="start-on-boot-checkbox">
+            <span class="slider round"></span>
+          </label>
+        </div>
+      </section>
+
+      <!-- Theme Configuration Section -->
+      <section class="config-card">
+        <h2>🎨 테마 설정</h2>
+        <div class="theme-config-container">
+          <span class="theme-label">테마 색상 톤</span>
+          <span class="theme-desc">프로그램 전반의 색상 테마를 20가지 중에서 고릅니다.</span>
+          <div class="theme-action-row">
+            <button id="theme-menu-btn" class="theme-select-btn">
+              <span class="theme-color-preview" id="current-theme-preview"></span>
+              <span id="current-theme-name">Classic Violet</span>
+              <span class="arrow-icon">▲</span>
+            </button>
+            <!-- Floating dropdown menu (Right aligned) -->
+            <div id="theme-dropdown" class="theme-dropdown">
+              <div class="theme-dropdown-list" id="theme-list-container">
+                <!-- Dynamically populated via JS -->
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- History Cleanup Section -->
+      <section class="config-card">
+        <h2>🗑️ 데이터 및 폴더 관리</h2>
+        <div class="cleanup-container">
+          <span class="cleanup-label">히스토리 및 저장 파일 관리</span>
+          <span class="cleanup-desc">이미지 히스토리가 저장되는 폴더를 열거나 전체 기록을 삭제합니다.</span>
+          <div class="action-btn-group">
+            <button id="open-folder-btn" class="action-btn primary">폴더 열기</button>
+            <button id="clear-history-btn" class="action-btn danger">기록 초기화</button>
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <footer class="footer">
+      <span class="version">v1.0.0</span>
+      <span class="copyright">© 2026 lazyant.dev. All rights reserved.</span>
+    </footer>
+  </div>
+
+  <script src="settings.js"></script>
+</body>
+</html>

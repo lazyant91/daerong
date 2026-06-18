@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>표시 중인 이미지 목록</title>
+  <link rel="stylesheet" href="../assets/themes.css">
+  <link rel="stylesheet" href="grid.css">
+</head>
+<body>
+  <div class="grid-window-container">
+    <!-- Header with window drag capability and close button -->
+    <header class="grid-header" id="grid-header">
+      <div class="header-title">
+        <div class="logo-dot"></div>
+        <span>화면에 표시 중인 모든 이미지</span>
+      </div>
+      <button class="close-btn" id="close-window-btn" title="닫기">✕</button>
+    </header>
+
+    <!-- Content Grid Area -->
+    <main class="grid-content">
+      <div class="image-grid" id="image-grid">
+        <!-- Grid Items injected dynamically by JS -->
+      </div>
+    </main>
+
+    <!-- Pagination Controls -->
+    <footer class="grid-footer">
+      <div class="pagination" id="pagination-controls">
+        <!-- Pagination buttons injected dynamically -->
+      </div>
+    </footer>
+  </div>
+
+  <script src="grid.js"></script>
+</body>
+</html>

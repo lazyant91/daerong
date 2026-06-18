@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <title>Tray Menu</title>
+  <link rel="stylesheet" href="../assets/themes.css">
+  <link rel="stylesheet" href="tray.css">
+</head>
+<body>
+  <div class="menu-container">
+    <div class="menu-header">
+      <span class="app-title">Daerong</span>
+    </div>
+    
+    <div class="section-divider"></div>
+    
+    <!-- Active Floating Windows Section -->
+    <div class="section-title">활성 이미지 목록</div>
+    <div id="active-list" class="active-list-container">
+      <!-- Dynamic list items will go here -->
+    </div>
+    
+    <div id="active-divider" class="section-divider"></div>
+    
+    <!-- Actions Section -->
+    <div class="menu-item-action" id="btn-toggle-hotkey">
+      <div class="action-label-container">
+        <span class="action-text">단축키 작동 일시정지</span>
+      </div>
+      <div class="toggle-switch">
+        <input type="checkbox" id="hotkey-checkbox">
+        <span class="slider"></span>
+      </div>
+    </div>
+    
+    <div class="menu-item" id="btn-close-all">
+      <span class="action-text">모든 플로팅 이미지 닫기</span>
+    </div>
+
+    <div class="menu-item has-submenu" id="history-submenu-trigger">
+      <div class="submenu-header">
+        <div>
+          <span class="action-text">클립보드 이미지 히스토리</span>
+        </div>
+        <span class="arrow">▶</span>
+      </div>
+      <div id="history-list" class="submenu-content">
+        <!-- History items will go here -->
+      </div>
+    </div>
+    
+    <div class="section-divider"></div>
+    
+    <!-- App Utility Section -->
+    <div class="menu-item" id="btn-settings">
+      <span class="action-text">설정</span>
+    </div>
+    
+    <div class="menu-item text-danger" id="btn-exit">
+      <span class="action-text">프로그램 종료</span>
+    </div>
+  </div>
+
+  <script src="tray.js"></script>
+</body>
+</html>

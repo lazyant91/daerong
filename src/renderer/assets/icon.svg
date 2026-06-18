@@ -1,0 +1,19 @@
+<svg viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <!-- 나뭇가지: A04 두 갈래 분기형 (골드 브라운 #b45309) -->
+  <path d="M2 3 L10 3 L16 2 L22 4 L28 4" stroke="#b45309" stroke-width="2" stroke-linecap="round"/>
+  <path d="M10 3 L12 0 M16 2 L18 0" stroke="#b45309" stroke-width="1.5"/>
+  <rect x="11" y="0" width="2" height="1" fill="#4ade80"/>
+  <rect x="17" y="0" width="2" height="1" fill="#4ade80"/>
+  <rect x="15" y="3" width="2" height="4" fill="#4ade80"/>
+  <!-- 클립보드: 네온 노랑판 #fef08a, 테두리 골드브라운 #d97706 -->
+  <rect x="6" y="8" width="20" height="23" rx="1.5" fill="#fef08a" stroke="#d97706" stroke-width="1"/>
+  <rect x="8" y="11" width="16" height="18" fill="#ffffff"/>
+  <!-- 메탈 클립 -->
+  <rect x="12" y="6" width="8" height="3" fill="#fef08a" stroke="#d97706" stroke-width="1"/>
+  <!-- 대형 한입 사과 (가로 10px 확대 정렬 버전, fill #ff3366) -->
+  <path d="M12 17 h3 v1 h-3 z M17 17 h3 v1 h-3 z M11 18 h9 v1 h-9 z M11 19 h8 v1 h-8 z M11 20 h10 v1 h-10 z M12 21 h9 v1 h-9 z M13 22 h7 v1 h-7 z M14 23 h5 v1 h-5 z" fill="#ff3366"/>
+  <!-- 3px S자형 꼭지 (갈색 #b45309) -->
+  <path d="M15 17 h1 v1 h-1 z M14 16 h1 v1 h-1 z M15 15 h1 v1 h-1 z" fill="#b45309"/>
+  <!-- 연두색 단일 잎사귀 (#4ade80) -->
+  <rect x="16" y="14" width="2" height="1" fill="#4ade80"/>
+</svg>

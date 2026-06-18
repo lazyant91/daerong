@@ -1,0 +1,35 @@
+{
+  "name": "daerong",
+  "version": "1.0.0",
+  "description": "Floating images from clipboard to screen",
+  "main": "src/main/index.js",
+  "scripts": {
+    "start": "electron .",
+    "pack": "electron-packager . Daerong --platform=win32 --arch=x64 --overwrite --out=dist --icon=src/renderer/assets/icon.ico",
+    "dist": "electron-packager . Daerong --platform=win32 --arch=x64 --overwrite --out=dist --icon=src/renderer/assets/icon.ico"
+  },
+  "keywords": [],
+  "author": "lazyant.dev",
+  "license": "MIT",
+  "devDependencies": {
+    "electron": "^31.0.1",
+    "electron-builder": "^24.13.3",
+    "electron-packager": "^17.1.2"
+  },
+  "build": {
+    "appId": "dev.lazyant.daerong",
+    "productName": "Daerong",
+    "win": {
+      "target": [
+        "portable"
+      ]
+    },
+    "files": [
+      "src/**/*",
+      "package.json"
+    ],
+    "directories": {
+      "output": "dist"
+    }
+  }
+}
