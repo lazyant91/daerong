@@ -1,9 +1,12 @@
 # Daerong (대롱)
 
+[![Release App](https://github.com/lazyant91/daerong/actions/workflows/release.yml/badge.svg)](https://github.com/lazyant91/daerong/actions)
+[![GitHub release](https://img.shields.io/github/v/release/lazyant91/daerong)](https://github.com/lazyant91/daerong/releases)
+
 클립보드 이미지를 화면에 대롱대롱 띄우는 편리한 일렉트론 데스크톱 애플리케이션입니다.
 
 ## 📌 프로젝트 정보
-- **현재 버전**: v1.0.0
+- **현재 버전**: v1.1.0
 - **업데이트 날짜**: 2026년 6월 19일
 - **라이선스**: MIT License
 
