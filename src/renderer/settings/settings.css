@@ -21,7 +21,7 @@
 }
 
 body {
-  background: var(--bg-gradient);
+  background: var(--bg-color);
   color: var(--text-primary);
   font-family: 'Pretendard', -apple-system, BlinkMacSystemFont, system-ui, Roboto, 'Segoe UI', 'Apple SD Gothic Neo', 'Noto Sans KR', sans-serif;
   width: 100%;
@@ -34,71 +34,76 @@ body {
 
 .settings-container {
   width: 100%;
-  height: 100%;
-  padding: 14px 16px 10px 16px; /* 패딩 축소 */
+  height: auto;
+  padding: 0 24px 16px 24px;
   display: flex;
   flex-direction: column;
-  justify-content: space-between;
+  justify-content: flex-start;
+  border: 1px solid rgba(255, 255, 255, 0.08);
 }
 
-/* Header design */
-.header {
-  margin-bottom: 6px;
-}
-
-.title-logo {
+/* Custom Titlebar for integrated UI look */
+.custom-titlebar {
+  height: 54px;
   display: flex;
   align-items: center;
-  gap: 10px;
+  margin-left: -24px;
+  margin-right: -24px;
+  margin-bottom: 12px;
+  padding: 8px 24px 0 24px;
+  background: transparent;
+  -webkit-app-region: drag;
+  user-select: none;
 }
 
-.logo-img {
-  width: 24px;
-  height: 24px;
-  filter: drop-shadow(0 0 6px var(--primary-glow));
+.custom-titlebar * {
+  pointer-events: none; /* Prevent inner elements from blocking window drag behavior */
 }
 
-h1 {
-  font-size: 22px;
+.titlebar-logo {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.titlebar-logo-img {
+  width: 32px;
+  height: 32px;
+  filter: drop-shadow(0 0 8px var(--primary-glow));
+}
+
+.titlebar-title {
+  font-size: 25px;
   font-weight: 800;
+  color: var(--text-primary);
   letter-spacing: -0.5px;
-  background: linear-gradient(45deg, #ffffff, var(--primary-color));
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-}
-
-.subtitle {
-  font-size: 11.5px;
-  font-weight: 400;
-  color: var(--text-secondary);
-  margin-top: 2px;
 }
 
 /* Main Section */
 .settings-main {
-  flex-grow: 1;
   display: flex;
   flex-direction: column;
-  gap: 6px; /* 카드간 세로 간격 축소 */
-  overflow-y: hidden; /* 스크롤바 완전 비활성화 */
-  margin-bottom: 6px;
+  gap: 14px;
+  overflow-y: visible; /* 스크롤바가 생기지 않도록 완전히 해제 */
+  padding-right: 4px; /* 스크롤바 노출 시 레이아웃 찌그러짐 방지 */
+  margin-bottom: 12px;
 }
 
 .config-card {
   background: var(--card-bg);
   border: 1px solid var(--card-border);
-  border-radius: 10px;
-  padding: 10px 14px; /* 카드 내부 여백 콤팩트화 */
+  border-radius: 12px;
+  padding: 16px 20px;
   backdrop-filter: blur(10px);
   -webkit-backdrop-filter: blur(10px);
   box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
 }
 
 h2 {
-  font-size: 12px;
+  font-size: 13.5px;
   font-weight: 700;
   color: var(--text-secondary);
-  margin-bottom: 6px; /* 6px로 조정 */
+  margin-bottom: 10px;
   letter-spacing: 0.5px;
   text-transform: uppercase;
 }
@@ -111,12 +116,12 @@ h2 {
 }
 
 .input-group label {
-  font-size: 10.5px;
+  font-size: 12px;
   color: var(--text-secondary);
   line-height: 1.3;
 }
 
-#hotkey-input {
+#hotkey-input, #magnifier-hotkey-input {
   width: 100%;
   padding: 8px 10px;
   border-radius: 6px;
@@ -124,7 +129,7 @@ h2 {
   background: var(--input-bg);
   color: #fff;
   font-family: inherit;
-  font-size: 13px;
+  font-size: 14px;
   font-weight: 500;
   text-align: center;
   cursor: pointer;
@@ -132,7 +137,7 @@ h2 {
   outline: none;
 }
 
-#hotkey-input:focus {
+#hotkey-input:focus, #magnifier-hotkey-input:focus {
   border-color: var(--primary-color);
   box-shadow: 0 0 10px rgba(157, 78, 221, 0.3);
   background: rgba(0,0,0,0.6);
@@ -160,13 +165,13 @@ h2 {
 }
 
 .switch-label, .cleanup-label, .theme-label {
-  font-size: 13.5px;
+  font-size: 15px;
   font-weight: 600;
   color: var(--text-primary);
 }
 
 .switch-desc, .cleanup-desc, .theme-desc {
-  font-size: 11.5px;
+  font-size: 12.5px;
   font-weight: 400;
   color: var(--text-secondary);
   line-height: 1.4;
@@ -246,7 +251,7 @@ input:checked + .slider:before {
 .action-btn {
   padding: 6px 12px;
   font-family: inherit;
-  font-size: 12px;
+  font-size: 13px;
   font-weight: 600;
   border-radius: 5px;
   border: 1px solid transparent;
@@ -296,7 +301,7 @@ input:checked + .slider:before {
   border-radius: 6px;
   color: var(--text-primary);
   font-family: inherit;
-  font-size: 12.5px;
+  font-size: 13.5px;
   font-weight: 600;
   cursor: pointer;
   transition: all 0.2s ease;
@@ -397,7 +402,7 @@ input:checked + .slider:before {
 }
 
 .theme-item-name {
-  font-size: 11.5px;
+  font-size: 12.5px;
   font-weight: 500;
   color: var(--text-primary);
   white-space: nowrap;
@@ -410,8 +415,8 @@ input:checked + .slider:before {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  margin-top: 6px;
-  font-size: 10px;
+  margin-top: 10px;
+  font-size: 11px;
   font-weight: 300;
   color: rgba(255, 255, 255, 0.18);
 }
@@ -429,4 +434,19 @@ input:checked + .slider:before {
 }
 .theme-dropdown::-webkit-scrollbar-thumb:hover {
   background: rgba(255, 255, 255, 0.2);
+}
+
+/* Custom scrollbar for settings-main content area */
+.settings-main::-webkit-scrollbar {
+  width: 4px;
+}
+.settings-main::-webkit-scrollbar-track {
+  background: transparent;
+}
+.settings-main::-webkit-scrollbar-thumb {
+  background: rgba(255, 255, 255, 0.15);
+  border-radius: 2px;
+}
+.settings-main::-webkit-scrollbar-thumb:hover {
+  background: var(--primary-color);
 }

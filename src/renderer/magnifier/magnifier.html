@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <title>돋보기</title>
+  <link rel="stylesheet" href="../assets/themes.css">
+  <link rel="stylesheet" href="magnifier.css">
+</head>
+<body data-theme="classic-violet">
+  <div class="magnifier-container" id="magnifier-container">
+    <!-- Titlebar / Header for dragging -->
+    <div class="titlebar" id="titlebar">
+      <span class="title-text">Live 돋보기</span>
+      <button class="close-btn" id="close-btn" title="닫기">✕</button>
+    </div>
+
+    <!-- Video Wrapper: Contains clipping of target area -->
+    <div class="video-wrapper" id="video-wrapper">
+      <video id="webcam-video" autoplay playsinline muted></video>
+    </div>
+
+    <!-- Float Control Bar: Hover-triggered control -->
+    <div class="control-bar" id="control-bar">
+      <button class="control-btn" id="zoom-out-btn" title="축소">-</button>
+      <span class="zoom-level" id="zoom-level-text">2.0x</span>
+      <button class="control-btn" id="zoom-in-btn" title="확대">+</button>
+      <div class="divider"></div>
+      <button class="control-btn play-pause-btn" id="play-pause-btn" title="일시정지/재개">⏸</button>
+      <div class="divider"></div>
+      <button class="control-btn" id="pin-btn" title="항상 위 해제" style="font-size: 11px;">📌</button>
+    </div>
+  </div>
+
+  <script src="magnifier.js"></script>
+</body>
+</html>

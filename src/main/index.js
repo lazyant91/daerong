@@ -1,4 +1,4 @@
-const { app, BrowserWindow, globalShortcut, clipboard, ipcMain, Tray, Menu, dialog, screen, protocol, net, shell } = require('electron');
+const { app, BrowserWindow, globalShortcut, clipboard, ipcMain, Tray, Menu, dialog, screen, protocol, net, shell, desktopCapturer } = require('electron');
 const path = require('path');
 const { pathToFileURL } = require('url');
 const fs = require('fs');
@@ -22,8 +22,33 @@ let trayMenuWindow = null; // Custom transparent tray menu window
 let settingsWindow = null;
 let gridWindow = null; // Grid viewer window for active images
 const floatingWindows = new Map(); // windowId -> { win, historyId, filePath }
+const magnifierWindows = new Map(); // windowId -> win
+let selectionWindow = null;
 let isHotkeyPaused = false;
 let activeDrags = {}; // windowId -> { offsetX, offsetY }
+
+const themeOverlayColors = {
+  'classic-violet': { color: '#0c0817', symbolColor: '#9d4edd' },
+  'deep-emerald': { color: '#04140e', symbolColor: '#0ca678' },
+  'sunset-glow': { color: '#180905', symbolColor: '#f76707' },
+  'midnight-blue': { color: '#050a18', symbolColor: '#3b5bdb' },
+  'cyberpunk-neon': { color: '#05050e', symbolColor: '#ff007f' },
+  'rose-quartz': { color: '#16080b', symbolColor: '#da77f2' },
+  'monochrome-slate': { color: '#111216', symbolColor: '#adb5bd' },
+  'tokyo-sakura': { color: '#1a0c11', symbolColor: '#f783ac' },
+  'volcanic-lava': { color: '#120303', symbolColor: '#fa5252' },
+  'nordic-frost': { color: '#050f16', symbolColor: '#228be6' },
+  'golden-amber': { color: '#150f05', symbolColor: '#fab005' },
+  'cyber-green': { color: '#030e06', symbolColor: '#37b24d' },
+  'retro-arcade': { color: '#060b19', symbolColor: '#ffcc00' },
+  'deep-berry': { color: '#13040c', symbolColor: '#e64980' },
+  'cappuccino': { color: '#140d0a', symbolColor: '#b08968' },
+  'mystic-lavender': { color: '#0f0d1a', symbolColor: '#845ef7' },
+  'abyssal-dark': { color: '#050505', symbolColor: '#e0e0e0' },
+  'ocean-breeze': { color: '#030f14', symbolColor: '#15aabf' },
+  'royal-gold': { color: '#050a14', symbolColor: '#d4af37' },
+  'autumn-forest': { color: '#140b05', symbolColor: '#d9480f' }
+};
 
 // Register custom protocol to bypass Chrome's local resource security restrictions
 protocol.registerSchemesAsPrivileged([
@@ -283,6 +308,115 @@ function registerGlobalHotkey() {
   } catch (err) {
     console.error('Error registering global shortcut:', err);
   }
+
+  // Register magnifier hotkey
+  const magHotkey = settings.magnifierHotkey || 'Ctrl+Shift+M';
+  try {
+    const registeredMag = globalShortcut.register(magHotkey, () => {
+      handleMagnifierHotkeyPress();
+    });
+
+    if (!registeredMag) {
+      console.error(`Failed to register magnifier hotkey: ${magHotkey}`);
+      if (magHotkey !== 'Ctrl+Shift+M') {
+        globalShortcut.register('Ctrl+Shift+M', () => {
+          handleMagnifierHotkeyPress();
+        });
+      }
+    }
+  } catch (err) {
+    console.error('Error registering magnifier global shortcut:', err);
+  }
+}
+
+function handleMagnifierHotkeyPress() {
+  if (selectionWindow) {
+    selectionWindow.focus();
+    return;
+  }
+
+  const cursor = screen.getCursorScreenPoint();
+  const display = screen.getDisplayNearestPoint(cursor);
+  const { x, y, width, height } = display.bounds;
+
+  selectionWindow = new BrowserWindow({
+    x,
+    y,
+    width,
+    height,
+    frame: false,
+    transparent: true,
+    alwaysOnTop: true,
+    skipTaskbar: true,
+    enableLargerThanScreen: true,
+    resizable: false,
+    movable: false,
+    focusable: true,
+    webPreferences: {
+      preload: getPreloadPath(),
+      contextIsolation: true,
+      nodeIntegration: false
+    }
+  });
+
+  selectionWindow.setBounds({ x, y, width, height });
+
+  const selectionHtmlPath = path.join(__dirname, '../renderer/magnifier/selection.html');
+  const queryUrl = `${pathToFileURL(selectionHtmlPath).toString()}?displayId=${display.id}&x=${x}&y=${y}&w=${width}&h=${height}`;
+  selectionWindow.loadURL(queryUrl);
+
+  selectionWindow.on('closed', () => {
+    selectionWindow = null;
+  });
+}
+
+function createMagnifierWindow(x, y, width, height, displayId) {
+  const magWidth = Math.max(200, width * 2);
+  const magHeight = Math.max(120, height * 2);
+
+  const cursor = screen.getCursorScreenPoint();
+  const displays = screen.getAllDisplays();
+  const display = displays.find(d => d.id.toString() === displayId.toString()) || screen.getDisplayNearestPoint(cursor);
+  const workArea = display.workArea;
+  const db = display.bounds;
+
+  let winX = Math.round(workArea.x + (workArea.width - magWidth) / 2);
+  let winY = Math.round(workArea.y + (workArea.height - magHeight) / 2);
+
+  const win = new BrowserWindow({
+    x: winX,
+    y: winY,
+    width: magWidth,
+    height: magHeight,
+    minWidth: 200,
+    minHeight: 120,
+    frame: false,
+    transparent: true,
+    alwaysOnTop: true,
+    skipTaskbar: false,
+    hasShadow: true,
+    title: 'Daerong 돋보기',
+    webPreferences: {
+      preload: getPreloadPath(),
+      contextIsolation: true,
+      nodeIntegration: false
+    }
+  });
+
+  win.setContentProtection(true);
+  win.setMenuBarVisibility(false);
+  
+  const winId = win.id;
+  magnifierWindows.set(winId, win);
+
+  const magnifierHtmlPath = path.join(__dirname, '../renderer/magnifier/magnifier.html');
+  const queryUrl = `${pathToFileURL(magnifierHtmlPath).toString()}?id=${winId}&displayId=${displayId}&rectX=${x}&rectY=${y}&rectW=${width}&rectH=${height}&disX=${db.x}&disY=${db.y}&disW=${db.width}&disH=${db.height}`;
+  win.loadURL(queryUrl);
+
+  win.on('closed', () => {
+    magnifierWindows.delete(winId);
+    delete activeDrags[winId];
+  });
 }
 
 function handleHotkeyPress() {
@@ -403,6 +537,14 @@ function closeAllFloatingWindows() {
     }
   }
   floatingWindows.clear();
+
+  for (const [id, win] of magnifierWindows.entries()) {
+    if (!win.isDestroyed()) {
+      win.close();
+    }
+  }
+  magnifierWindows.clear();
+
   notifyActiveWindowsChanged();
 }
 
@@ -412,13 +554,24 @@ function createSettingsWindow() {
     return;
   }
 
+  const currentSettings = store.getSettings();
+  const themeId = currentSettings.theme || 'classic-violet';
+  const overlayTheme = themeOverlayColors[themeId] || themeOverlayColors['classic-violet'];
+
   settingsWindow = new BrowserWindow({
-    width: 450,
-    height: 630,
+    width: 500,
+    height: 860,
     resizable: false,
+    maximizable: false,
     title: 'Daerong 설정',
     show: false,
-    backgroundColor: '#0c0817',
+    backgroundColor: overlayTheme.color,
+    titleBarStyle: 'hidden',
+    titleBarOverlay: {
+      color: overlayTheme.color,
+      symbolColor: overlayTheme.symbolColor,
+      height: 54
+    },
     webPreferences: {
       preload: getPreloadPath(),
       contextIsolation: true,
@@ -518,9 +671,20 @@ ipcMain.on('set-setting', (event, key, value) => {
     }
   }
   
-  if (key === 'hotkey') {
+  if (key === 'hotkey' || key === 'magnifierHotkey') {
     registerGlobalHotkey();
     updateTrayMenu();
+  }
+
+  if (key === 'theme') {
+    if (settingsWindow && !settingsWindow.isDestroyed()) {
+      const overlayTheme = themeOverlayColors[value] || themeOverlayColors['classic-violet'];
+      settingsWindow.setTitleBarOverlay({
+        color: overlayTheme.color,
+        symbolColor: overlayTheme.symbolColor,
+        height: 54
+      });
+    }
   }
 });
 
@@ -553,6 +717,12 @@ ipcMain.handle('get-window-info', (event) => {
       return {
         windowId: win.id,
         isSettingsWindow: true
+      };
+    } else if (magnifierWindows.has(win.id)) {
+      return {
+        windowId: win.id,
+        isMagnifierWindow: true,
+        isAlwaysOnTop: win.isAlwaysOnTop()
       };
     }
   }
@@ -679,6 +849,28 @@ ipcMain.on('resize-window', (event, windowId, width, height) => {
   }
 });
 
+ipcMain.on('resize-window-content', (event, windowId, width, height) => {
+  const win = BrowserWindow.fromId(windowId);
+  if (win && !win.isDestroyed()) {
+    const bounds = win.getBounds();
+    const contentBounds = win.getContentBounds();
+    
+    const frameW = bounds.width - contentBounds.width;
+    const frameH = bounds.height - contentBounds.height;
+    
+    const targetWidth = width + frameW;
+    const targetHeight = height + frameH;
+    
+    win.setBounds({
+      x: Math.round(bounds.x + (bounds.width - targetWidth) / 2),
+      y: Math.round(bounds.y + (bounds.height - targetHeight) / 2),
+      width: targetWidth,
+      height: targetHeight
+    });
+    saveActiveWindowsState();
+  }
+});
+
 ipcMain.handle('get-window-bounds', (event, windowId) => {
   const win = BrowserWindow.fromId(windowId);
   return win ? win.getBounds() : null;
@@ -695,6 +887,34 @@ ipcMain.handle('delete-history-item', (event, id) => {
   const success = store.deleteHistoryItem(id);
   updateTrayMenu();
   return success;
+});
+
+ipcMain.handle('get-capture-sources', async () => {
+  try {
+    const sources = await desktopCapturer.getSources({ types: ['screen'] });
+    return sources.map(source => ({
+      id: source.id,
+      name: source.name,
+      display_id: source.display_id
+    }));
+  } catch (err) {
+    console.error('Failed to get capture sources:', err);
+    return [];
+  }
+});
+
+ipcMain.on('start-magnifier-selection', (event, rect) => {
+  if (selectionWindow && !selectionWindow.isDestroyed()) {
+    selectionWindow.close();
+  }
+  const { x, y, width, height, displayId } = rect;
+  createMagnifierWindow(x, y, width, height, displayId);
+});
+
+ipcMain.on('close-selection-window', () => {
+  if (selectionWindow && !selectionWindow.isDestroyed()) {
+    selectionWindow.close();
+  }
 });
 
 ipcMain.on('clear-history', () => {

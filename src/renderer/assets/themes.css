@@ -1,5 +1,6 @@
 :root {
   /* Default Theme (Classic Violet) */
+  --bg-color: #0c0817;
   --bg-gradient: linear-gradient(145deg, #0c0817 0%, #160e2e 50%, #0b0714 100%);
   --text-primary: #f3f0ff;
   --text-secondary: #a39eb9;
@@ -16,6 +17,7 @@
 
 /* 1. Classic Violet (Default) */
 :root[data-theme="classic-violet"] {
+  --bg-color: #0c0817;
   --bg-gradient: linear-gradient(145deg, #0c0817 0%, #160e2e 50%, #0b0714 100%);
   --text-primary: #f3f0ff;
   --text-secondary: #a39eb9;
@@ -29,6 +31,7 @@
 
 /* 2. Deep Emerald */
 :root[data-theme="deep-emerald"] {
+  --bg-color: #04140e;
   --bg-gradient: linear-gradient(145deg, #04140e 0%, #08251b 50%, #030f0a 100%);
   --text-primary: #e6fcf5;
   --text-secondary: #96b8ad;
@@ -42,6 +45,7 @@
 
 /* 3. Sunset Glow */
 :root[data-theme="sunset-glow"] {
+  --bg-color: #180905;
   --bg-gradient: linear-gradient(145deg, #180905 0%, #2f120a 50%, #130704 100%);
   --text-primary: #fff4e6;
   --text-secondary: #d8b4a6;
@@ -55,6 +59,7 @@
 
 /* 4. Midnight Blue */
 :root[data-theme="midnight-blue"] {
+  --bg-color: #050a18;
   --bg-gradient: linear-gradient(145deg, #050a18 0%, #0a152e 50%, #040813 100%);
   --text-primary: #edf2ff;
   --text-secondary: #a5b3cd;
@@ -68,6 +73,7 @@
 
 /* 5. Cyberpunk Neon */
 :root[data-theme="cyberpunk-neon"] {
+  --bg-color: #05050e;
   --bg-gradient: linear-gradient(145deg, #05050e 0%, #0c0b1a 50%, #030308 100%);
   --text-primary: #ffffff;
   --text-secondary: #8b8ba8;
@@ -81,6 +87,7 @@
 
 /* 6. Rose Quartz */
 :root[data-theme="rose-quartz"] {
+  --bg-color: #16080b;
   --bg-gradient: linear-gradient(145deg, #16080b 0%, #290f15 50%, #100608 100%);
   --text-primary: #fff0f6;
   --text-secondary: #cfa4b2;
@@ -94,6 +101,7 @@
 
 /* 7. Monochrome Slate */
 :root[data-theme="monochrome-slate"] {
+  --bg-color: #111216;
   --bg-gradient: linear-gradient(145deg, #111216 0%, #1d1f27 50%, #0a0b0d 100%);
   --text-primary: #f1f3f5;
   --text-secondary: #909296;
@@ -107,6 +115,7 @@
 
 /* 8. Tokyo Sakura */
 :root[data-theme="tokyo-sakura"] {
+  --bg-color: #1a0c11;
   --bg-gradient: linear-gradient(145deg, #1a0c11 0%, #301620 50%, #13080c 100%);
   --text-primary: #fff0f6;
   --text-secondary: #dab3c1;
@@ -120,6 +129,7 @@
 
 /* 9. Volcanic Lava */
 :root[data-theme="volcanic-lava"] {
+  --bg-color: #120303;
   --bg-gradient: linear-gradient(145deg, #120303 0%, #250707 50%, #0c0202 100%);
   --text-primary: #fff5f5;
   --text-secondary: #cc9999;
@@ -133,6 +143,7 @@
 
 /* 10. Nordic Frost */
 :root[data-theme="nordic-frost"] {
+  --bg-color: #050f16;
   --bg-gradient: linear-gradient(145deg, #050f16 0%, #0b1c29 50%, #030a0f 100%);
   --text-primary: #f0f8ff;
   --text-secondary: #92b2ca;
@@ -146,6 +157,7 @@
 
 /* 11. Golden Amber */
 :root[data-theme="golden-amber"] {
+  --bg-color: #150f05;
   --bg-gradient: linear-gradient(145deg, #150f05 0%, #291e0a 50%, #0f0b03 100%);
   --text-primary: #fff9db;
   --text-secondary: #d1c1a2;
@@ -159,6 +171,7 @@
 
 /* 12. Cyber Green */
 :root[data-theme="cyber-green"] {
+  --bg-color: #030e06;
   --bg-gradient: linear-gradient(145deg, #030e06 0%, #071f0d 50%, #020a04 100%);
   --text-primary: #ebfbee;
   --text-secondary: #8cb595;
@@ -172,6 +185,7 @@
 
 /* 13. Retro Arcade */
 :root[data-theme="retro-arcade"] {
+  --bg-color: #060b19;
   --bg-gradient: linear-gradient(145deg, #060b19 0%, #0c1630 50%, #040711 100%);
   --text-primary: #e8ebf0;
   --text-secondary: #9fa6b8;
@@ -185,6 +199,7 @@
 
 /* 14. Deep Berry */
 :root[data-theme="deep-berry"] {
+  --bg-color: #13040c;
   --bg-gradient: linear-gradient(145deg, #13040c 0%, #260918 50%, #0d0208 100%);
   --text-primary: #fff0f6;
   --text-secondary: #cca3b7;
@@ -198,6 +213,7 @@
 
 /* 15. Cappuccino */
 :root[data-theme="cappuccino"] {
+  --bg-color: #140d0a;
   --bg-gradient: linear-gradient(145deg, #140d0a 0%, #261914 50%, #0e0907 100%);
   --text-primary: #fcf8f2;
   --text-secondary: #c5b8b0;
@@ -211,6 +227,7 @@
 
 /* 16. Mystic Lavender */
 :root[data-theme="mystic-lavender"] {
+  --bg-color: #0f0d1a;
   --bg-gradient: linear-gradient(145deg, #0f0d1a 0%, #1c1830 50%, #0a0812 100%);
   --text-primary: #f3f0ff;
   --text-secondary: #b3aed2;
@@ -224,6 +241,7 @@
 
 /* 17. Abyssal Dark */
 :root[data-theme="abyssal-dark"] {
+  --bg-color: #050505;
   --bg-gradient: linear-gradient(145deg, #050505 0%, #0f0f0f 50%, #000000 100%);
   --text-primary: #e0e0e0;
   --text-secondary: #757575;
@@ -237,6 +255,7 @@
 
 /* 18. Ocean Breeze */
 :root[data-theme="ocean-breeze"] {
+  --bg-color: #030f14;
   --bg-gradient: linear-gradient(145deg, #030f14 0%, #061e29 50%, #020a0d 100%);
   --text-primary: #e3fafc;
   --text-secondary: #8cb9cc;
@@ -250,6 +269,7 @@
 
 /* 19. Royal Gold */
 :root[data-theme="royal-gold"] {
+  --bg-color: #050a14;
   --bg-gradient: linear-gradient(145deg, #050a14 0%, #0a1326 50%, #03060d 100%);
   --text-primary: #f7f4eb;
   --text-secondary: #b3a484;
@@ -263,6 +283,7 @@
 
 /* 20. Autumn Forest */
 :root[data-theme="autumn-forest"] {
+  --bg-color: #140b05;
   --bg-gradient: linear-gradient(145deg, #140b05 0%, #26150a 50%, #0e0803 100%);
   --text-primary: #fdf5e6;
   --text-secondary: #cca380;

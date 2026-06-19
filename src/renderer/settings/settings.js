@@ -1,4 +1,5 @@
 const hotkeyInput = document.getElementById('hotkey-input');
+const magnifierHotkeyInput = document.getElementById('magnifier-hotkey-input');
 const closeToTrayCheckbox = document.getElementById('close-to-tray-checkbox');
 const startOnBootCheckbox = document.getElementById('start-on-boot-checkbox');
 const clearHistoryBtn = document.getElementById('clear-history-btn');
@@ -12,6 +13,7 @@ const themeDropdown = document.getElementById('theme-dropdown');
 const themeListContainer = document.getElementById('theme-list-container');
 
 let activeHotkey = '';
+let activeMagnifierHotkey = '';
 let currentThemeId = 'classic-violet';
 
 // 20 Themes definition
@@ -44,6 +46,10 @@ async function initSettings() {
   if (settings) {
     activeHotkey = settings.hotkey;
     hotkeyInput.value = activeHotkey;
+    
+    activeMagnifierHotkey = settings.magnifierHotkey || 'Ctrl+Shift+M';
+    magnifierHotkeyInput.value = activeMagnifierHotkey;
+
     closeToTrayCheckbox.checked = settings.closeToTray;
     startOnBootCheckbox.checked = settings.startOnBoot;
     
@@ -54,6 +60,7 @@ async function initSettings() {
   }
 
   renderThemeList();
+  setTimeout(adjustWindowSize, 60);
 }
 
 function applyTheme(themeId) {
@@ -188,6 +195,72 @@ hotkeyInput.addEventListener('keydown', (e) => {
   }
 });
 
+// Intercept Keydown to record Magnifier Hotkey combinations
+magnifierHotkeyInput.addEventListener('focus', () => {
+  magnifierHotkeyInput.value = '키 조합을 입력하세요...';
+  magnifierHotkeyInput.style.borderColor = 'var(--primary-color)';
+});
+
+magnifierHotkeyInput.addEventListener('blur', () => {
+  magnifierHotkeyInput.value = activeMagnifierHotkey;
+  magnifierHotkeyInput.style.borderColor = '';
+});
+
+magnifierHotkeyInput.addEventListener('keydown', (e) => {
+  e.preventDefault();
+  e.stopPropagation();
+
+  if (e.key === 'Escape') {
+    magnifierHotkeyInput.value = activeMagnifierHotkey;
+    magnifierHotkeyInput.blur();
+    showToast('⏸️ 돋보기 단축키 지정이 취소되었습니다.');
+    return;
+  }
+
+  const modifiers = [];
+  if (e.ctrlKey) modifiers.push('Ctrl');
+  if (e.shiftKey) modifiers.push('Shift');
+  if (e.altKey) modifiers.push('Alt');
+
+  const key = e.key;
+  const isModifierKey = ['Control', 'Shift', 'Alt', 'Meta'].includes(key);
+
+  if (isModifierKey) {
+    if (modifiers.length > 0) {
+      magnifierHotkeyInput.value = modifiers.join('+') + ' + ...';
+    } else {
+      magnifierHotkeyInput.value = '키 조합을 입력하세요...';
+    }
+  } else {
+    let finalKey = key;
+    
+    // Normalise special keys for Electron GlobalShortcut compatibility
+    if (key === ' ') {
+      finalKey = 'Space';
+    } else if (key === 'ArrowUp') {
+      finalKey = 'Up';
+    } else if (key === 'ArrowDown') {
+      finalKey = 'Down';
+    } else if (key === 'ArrowLeft') {
+      finalKey = 'Left';
+    } else if (key === 'ArrowRight') {
+      finalKey = 'Right';
+    } else if (key.length === 1) {
+      finalKey = key.toUpperCase();
+    }
+
+    const hotkeyStr = [...modifiers, finalKey].join('+');
+
+    activeMagnifierHotkey = hotkeyStr;
+    magnifierHotkeyInput.value = activeMagnifierHotkey;
+    
+    // Save settings
+    window.electronAPI.setSetting('magnifierHotkey', hotkeyStr);
+    showToast(`⌨️ 돋보기 단축키가 '${hotkeyStr}'로 저장되었습니다.`);
+    magnifierHotkeyInput.blur();
+  }
+});
+
 // Settings Changes Listeners
 closeToTrayCheckbox.addEventListener('change', () => {
   window.electronAPI.setSetting('closeToTray', closeToTrayCheckbox.checked);
@@ -211,6 +284,10 @@ clearHistoryBtn.addEventListener('click', () => {
 window.electronAPI.onSettingsChanged((newSettings) => {
   activeHotkey = newSettings.hotkey;
   hotkeyInput.value = activeHotkey;
+  if (newSettings.magnifierHotkey) {
+    activeMagnifierHotkey = newSettings.magnifierHotkey;
+    magnifierHotkeyInput.value = activeMagnifierHotkey;
+  }
   closeToTrayCheckbox.checked = newSettings.closeToTray;
   startOnBootCheckbox.checked = newSettings.startOnBoot;
   if (newSettings.theme && newSettings.theme !== currentThemeId) {
@@ -265,5 +342,24 @@ function showToast(message) {
   }, 2200);
 }
 
+async function adjustWindowSize() {
+  try {
+    const info = await window.electronAPI.getWindowInfo();
+    if (info && info.windowId) {
+      const container = document.querySelector('.settings-container');
+      const contentHeight = Math.ceil(container.getBoundingClientRect().height) + 2;
+      const contentWidth = 500;
+      window.electronAPI.resizeWindowContent(info.windowId, contentWidth, contentHeight);
+    }
+  } catch (err) {
+    console.error('Failed to adjust settings window size:', err);
+  }
+}
+
 // Start
 initSettings();
+
+// Safety fallback for load completion
+window.addEventListener('load', () => {
+  setTimeout(adjustWindowSize, 100);
+});

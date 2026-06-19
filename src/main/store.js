@@ -25,6 +25,7 @@ class Store {
 
     this.defaultSettings = {
       hotkey: 'Ctrl+Shift+F',
+      magnifierHotkey: 'Ctrl+Shift+M',
       closeToTray: true,
       startOnBoot: false,
       theme: 'classic-violet'

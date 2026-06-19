@@ -25,9 +25,15 @@ contextBridge.exposeInMainWorld('electronAPI', {
 
   // Window Resizing & Bounds Control APIs
   resizeWindow: (windowId, width, height) => ipcRenderer.send('resize-window', windowId, width, height),
+  resizeWindowContent: (windowId, width, height) => ipcRenderer.send('resize-window-content', windowId, width, height),
   getWindowBounds: (windowId) => ipcRenderer.invoke('get-window-bounds', windowId),
   setWindowBounds: (windowId, bounds) => ipcRenderer.send('set-window-bounds', windowId, bounds),
   resizeTrayWindow: (width, height) => ipcRenderer.send('resize-tray-window', width, height),
+
+  // Magnifier APIs
+  getCaptureSources: () => ipcRenderer.invoke('get-capture-sources'),
+  startMagnifierSelection: (rect) => ipcRenderer.send('start-magnifier-selection', rect),
+  closeSelectionWindow: () => ipcRenderer.send('close-selection-window'),
 
   // History Clean Up API
   clearHistory: () => ipcRenderer.send('clear-history'),

@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <title>Magnifier Region Selection</title>
+  <style>
+    html, body {
+      margin: 0;
+      padding: 0;
+      width: 100%;
+      height: 100%;
+      overflow: hidden;
+      background: transparent;
+      user-select: none;
+      cursor: crosshair;
+    }
+    canvas {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      display: block;
+      z-index: 1;
+    }
+    .guide-tip {
+      position: fixed;
+      top: 20px;
+      left: 50%;
+      transform: translateX(-50%);
+      background: rgba(12, 8, 23, 0.85);
+      backdrop-filter: blur(10px);
+      border: 1px solid rgba(157, 78, 221, 0.3);
+      color: #f3f0ff;
+      padding: 10px 20px;
+      border-radius: 20px;
+      font-size: 13px;
+      font-family: 'Malgun Gothic', sans-serif;
+      box-shadow: 0 4px 20px rgba(0, 0, 0, 0.4);
+      z-index: 10;
+      pointer-events: none;
+      white-space: nowrap;
+      text-align: center;
+      letter-spacing: 0.5px;
+      animation: fadeInDown 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+    .guide-tip strong {
+      color: #9d4edd;
+    }
+    @keyframes fadeInDown {
+      from {
+        opacity: 0;
+        transform: translate(-50%, -10px);
+      }
+      to {
+        opacity: 1;
+        transform: translate(-50%, 0);
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="guide-tip">
+    🔍 <strong>마우스 드래그</strong>로 확대할 영역을 지정하세요. (취소: <strong>ESC</strong>)
+  </div>
+  <canvas id="selection-canvas"></canvas>
+
+  <script src="selection.js"></script>
+</body>
+</html>
