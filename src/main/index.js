@@ -996,9 +996,8 @@ ipcMain.handle('get-hotkey-paused', () => {
 
 ipcMain.handle('toggle-hotkey-paused', () => {
   isHotkeyPaused = !isHotkeyPaused;
-  const settings = store.getSettings();
   if (isHotkeyPaused) {
-    globalShortcut.unregister(settings.hotkey);
+    globalShortcut.unregisterAll();
   } else {
     registerGlobalHotkey();
   }
